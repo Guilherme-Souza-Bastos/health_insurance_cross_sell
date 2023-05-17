@@ -4,7 +4,7 @@ Welcome to my portifolio. The current project tackle on a classification problem
 
 
 ## 1. Business Proposition
-___
+
 The [Dataset](https://www.kaggle.com/datasets/anmolkumar/health-insurance-cross-sell-prediction) corresponds of a insurance company located in India. Said company provides health insurance to its customers, now they want help to in predicting potential clients interest in acquiring a car insurance policy. Building a Machine Learning model to predict whether a customer would be interested in vehicle insurance, is  helper to archive this goal.
 Creating this model was the work of this project.
 
@@ -17,8 +17,10 @@ In order to have a coherent project, some assumptions had to be made about the c
 
 
 ## 2. Data Understanding
----
-The dataset has 381,109 rows (customers) and 12 columns (customers characteristics), as displayed in the following table:
+
+The dataset has 381,109 rows (customers) and 12 columns (customers characteristics). At first glance I'm able to notice the data is unbaceled. There are 381,109 unique customers, 334,399 and not interested (87,74%) in the new car insurance policy, while 46,710 are interested (12,26%).
+
+The dataset is displayed in the following table:
 
 |Attribute|Definition|Data Type|
 |---|---|---|
@@ -36,9 +38,14 @@ The dataset has 381,109 rows (customers) and 12 columns (customers characteristi
 |response|1 : Customer is interested, 0 : Customer is not interested|int64|
 
 ## 3. Plan of Action
----
+
 The [CRIPS-DM](https://www.ibm.com/docs/en/spss-modeler/saas?topic=dm-crisp-help-overview) methodology was applied to trace my plan of action.
 Here's the process, step by step:
+
+<p align="center">
+ <img src="images/crisp.png"  style="zoom:45%"/>
+</p>
+
 
 1. **Business Understanding:** The insurance company wants a model to predict the potential customers for their new car insurance policy.
 2. **Data Understanding:** To build the model, a dataset, with relevant information about our customers, was provided.
@@ -46,11 +53,11 @@ Here's the process, step by step:
 4. **Exploratory Data Analysis:** EDA is helpful to investigate the data and summarize the key insights. It will give me the basic understanding of the data, it's distribution, null values and much more. I used both graphs and python functions to extract insights.
 5. **Feature Selection:** Feature Selection is the method of choosing relevant features for the machine learning model. For this purpose, Boruta and extra trees classifier were utilized.
 6. **Machine Learning Modeling:** I build 6 machine learning classification models in order to find the best solution to the business proposition. To ensure that our models are good generalization tools, cross validation was utilized, as well as hyperparameters tuning. Models built: Logistic regression, random forest classifier, XGBoost, LightGBM, KNN and decision tree classifier.
-7. **Evaluation:** Evaluation metrics are useful for determining the best machine learning model, out of the 6 previously built. The succeeding metrics were used to evaluate the models: Accuracy (both train and test datasets), confusion matrix, precision, recall, F1-score, ROC curve, AUC and cumulative gain curve.     
-
+7. **Evaluation:** Evaluation metrics are useful for determining the best machine learning model, out of the 6 previously built. The succeeding metrics were used to evaluate the models: Accuracy (both train and test datasets), confusion matrix, precision, recall, F1-score, ROC curve, AUC and cumulative gain curve.  
+8. **Deployment:** The deployment was done using the Python library Streamlit. On the Streamlit website, we can choose how many phone calls the insurance company is willing to make, and thus, providing a visual comparison of using the LightGBM model versus randomly calling our customers. We're also able to download the CSV file, with information about: true response, model prediction, model profit and random profit; for the selected number of calls.
 
 ## 4. Extracted Insights
-***
+
 1. 60.91% of the Interested customers are male, 39.09% are female
 2. Younger people ( under 35 ) are less likely to be interest in car insurance
 3. Customers without a driver's license aren't interested in car insurance
@@ -63,7 +70,7 @@ Here's the process, step by step:
 10. The number of days that the customer is affiliated with our company, has no correlation with the interest in our car insurance policy
 
 ## 5. Machine Learning Models and Evaluation Metrics
-***
+
 As previously stated, 6 classification machine learning models were built to make the prediction about interested clients.
  These are their metrics, sorted by "F1-score 1":
 
@@ -100,7 +107,7 @@ Bellow are it's metrics:
 </p>
 
 ## 6. Business Results
-***
+
 The intent of this project is to determine the best percentage of calls that should be made, in order to maximize our profits and reduce our costs.
 Our database comes from an Indian insurance company, so all the monetary values are on Rupees (₹). On the day I'm working on this project, ₹81.7=US$1.
 
@@ -121,11 +128,19 @@ A comparison between the Hyper LGBM model and the company's previous random meth
 
 |# of Calls|Model Profit (US$) |Random Profit (US$) | Diffecence (US$)|
 |---|---|---|---|
-|5000|39,121.79|7,447.07|31,674.72|
-|10000|78,789.96|13,796.30|64,993.66|
-|20000|156,729.99|26,474.73|130,255.26|
-|28297|221,790.80|37,740.06|184.050.74|
+|5000|39,121.79|7,500.73|31,621.06|
+|10000|78,789.96|13,859.42|64,930.54|
+|20000|156,729.99|26,106.51|130,623.48|
+|28297|221,790.80|37,760.51|184,030.29|
 
 As can be observed, the Hyper LGBM model outperformes randomly calling customers.
 
-**Even if the company decided to call 100% of their customers (76,222), their maximum profit would be ₹16,318,088.88 ( US$199,731.81 ). ₹1,802,219.48 (US$22,058.99) lower than our model reaching 37% of the customer.**
+**Even if the company decided to call 100% of their customers (76,222), their maximum profit would be ₹16,318,088.88 ( US$199,731.81 ). ₹1,802,219.48 (US$22,058.99) lower than our model reaching 37% of the customers.**
+
+
+## 7. Future Work
+
+- Implement more model, to gain more results
+- More data preprocessing, to create better suitable data
+- Using the same method to predict positive response, for other kinds of insurances
+- Improve the Streamlit webapp interface with other functionalities, to enhance user experience
